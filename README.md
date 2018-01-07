@@ -1,0 +1,1 @@
+.NET Core app built with Docker

@@ -1,0 +1,9 @@
+---
+version: "3"
+services:
+
+  myapp:
+    build: .
+    image: nramirez/dotnetapp
+    ports: 
+      - "8080:80"
