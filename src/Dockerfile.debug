@@ -3,12 +3,15 @@ WORKDIR /src
 COPY . .
 RUN dotnet clean
 RUN dotnet restore
-RUN dotnet build
-RUN dotnet publish -o /output
+RUN dotnet build --configuration Debug
+RUN dotnet publish --configuration Debug -o /output
 
 FROM microsoft/aspnetcore:latest
 ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
+RUN apt update
+RUN apt install -y curl unzip procps
+RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l ~/vsdbg
 WORKDIR /app
 COPY --from=build /output .
 ENTRYPOINT ["dotnet", "dotnetapp.dll"]

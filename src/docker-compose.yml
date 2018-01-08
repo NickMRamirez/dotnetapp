@@ -1,0 +1,12 @@
+---
+version: "3"
+services:
+
+  myapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
+    image: nramirez/dotnetapp:debug
+    container_name: myapp
+    ports: 
+      - "8080:80"
